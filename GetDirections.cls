@@ -17,7 +17,7 @@ Sub GetDirections()
     Dim domDoc As Object
     
     'Set the variables
-googlekey = "<ENTER YOUR API KEY>"
+    googlekey = "<ENTER YOUR API KEY>"
     origin = Replace(Range("A2"), ", ", "+")
     destination = Replace(Range("A5"), ", ", "+")
     query = "origin=" & origin & "&destination=" & destination
