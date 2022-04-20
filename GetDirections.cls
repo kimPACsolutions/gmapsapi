@@ -1,3 +1,5 @@
+'Edited to use positionstack free API instead of google maps
+
 VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
@@ -17,7 +19,7 @@ Sub GetDirections()
     Dim domDoc As Object
     
     'Set the variables
-    googlekey = "<ENTER YOUR API KEY>"
+    googlekey = "<49a24b3bf1d06e7ae131888ff5d6b3f8>"
     origin = Replace(Range("A2"), ", ", "+")
     destination = Replace(Range("A5"), ", ", "+")
     query = "origin=" & origin & "&destination=" & destination
@@ -36,10 +38,12 @@ Sub GetDirections()
         MsgBox ("Need to input Province/State")
     Else
         'Open and send the request for directions to Google Maps API
-        xhrRequest.Open "GET", "https://maps.googleapis.com/maps/api/directions/xml?" & _
-        query & "&avoid=tolls" & "&units=imperial" & "&key=" & googlekey, False
+        xhrRequest.Open "GET", "http://api.positionstack.com/v1/" & _
+        query & googlekey, False
         xhrRequest.Send
     
+      'will output as json by default - can output as xml on paid plan, which I don't want, but I don't know how to parse json because I have no clue what I'm doing
+      
         'Load the XML into a container
         domDoc.LoadXML xhrRequest.responseText
         
